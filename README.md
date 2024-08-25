@@ -16,6 +16,8 @@ The project follows the architecture laid out in the course, with all necessary 
   - `npm start`: Starts the app.
   - `npm run build-dev`: Starts the webpack dev server for development.
   - `npm run build-prod`: Generates the dist folder for production.
+  - `npm run test`: The project includes unit tests written with Jest. To run the tests.
+  
 
 ### Dependencies
 - Express
