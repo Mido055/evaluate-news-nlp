@@ -1,21 +1,21 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
-    background-color: #f8f8f8;
-    border-bottom: 1px solid #e7e7e7;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+  text-align: center;
 
-    .logo {
-        font-size: 24px;
-        font-weight: bold;
-    }
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
 
-    .navigation {
-        a {
-            text-decoration: none;
-            padding: 0 15px;
-            color: #333;
-        }
+  .navigation {
+    a {
+      text-decoration: none;
+      padding: 0 15px;
+      color: #333;
     }
+  }
 }

@@ -1,35 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>News Article NLP Analyzer</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="/styles/main.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
     <header>
-        <div class="logo">Logo</div>
-        <nav class="navigation">Navigation</nav>
+      <div class="logo">Analyze a News Article</div>
+      <nav class="navigation">Home</nav>
     </header>
 
     <main>
-        <section class="form-section">
-            <h2>Analyze a News Article</h2>
-            <form id="urlForm">
-                <label for="name">Enter URL:</label>
-                <input id="name" type="url" name="url" placeholder="Enter URL" required />
-                <button type="submit">Submit</button>
-            </form>            
-        </section>
+      <section class="form-section">
+        <h2>Analyze a News Article</h2>
+        <form id="urlForm">
+          <label for="name">Enter URL:</label>
+          <input
+            id="name"
+            type="url"
+            name="url"
+            placeholder="Enter URL"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </section>
 
-        <section class="results-section">
-            <strong>Form Results:</strong>
-            <div id="results"></div>
-        </section>
+      <section class="results-section">
+        <strong>Form Results:</strong>
+        <div id="results"></div>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 NLP Analyzer. All rights reserved.</p>
+      <p>&copy; 2024 NLP Analyzer. All rights reserved.</p>
     </footer>
-</body>
+  </body>
 </html>
