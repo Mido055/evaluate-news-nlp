@@ -1,30 +1,33 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+//form handelr 
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
-
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault();
+    const formUrl = document.getElementById('name').value;
 
-    // Get the URL from the input field
-    const formText = document.getElementById('name').value;
-
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
-    
-    // Check if the URL is valid
- 
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+    try {
+        const response = await fetch('/api/analyze', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ url: formUrl })
+        });
+        const data = await response.json();
+        console.log("Data parsed:", data);
+        updateUI(data);
+    } catch (error) {
+        console.error('Error fetching analysis:', error);
+        document.getElementById('results').innerText = 'Failed to fetch analysis: ' + error.message;
+    }
 }
 
-// Function to send data to the server
+function updateUI(apiData) {
+    const resultsElement = document.getElementById('results');
+    resultsElement.innerHTML = `
+        <p>Polarity: ${apiData.polarity}</p>
+        <p>Subjectivity: ${apiData.subjectivity}</p>
+        <p>Text: ${apiData.text}</p>
+    `;
+}
 
-// Export the handleSubmit function
 export { handleSubmit };
-

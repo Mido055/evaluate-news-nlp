@@ -1,9 +1,6 @@
-// js files
+// index-client
 import { handleSubmit } from './js/formHandler'
+import './styles/main.scss';
 
 
-
-// alert("I EXIST")
-// console.log("CHANGE!!");
-
-// sass files
+console.log("CHANGE!!");
