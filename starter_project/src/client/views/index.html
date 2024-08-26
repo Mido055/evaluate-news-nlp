@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>News Article NLP Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Analyze a News Article</div>
+      <nav class="navigation">Home</nav>
+    </header>
 
-    <body>
+    <main>
+      <section class="form-section">
+        <h2>Analyze a News Article</h2>
+        <form id="urlForm">
+          <label for="name">Enter URL:</label>
+          <input
+            id="name"
+            type="url"
+            name="url"
+            placeholder="Enter URL"
+            required
+          />
+          <button type="submit">Submit</button>
+        </form>
+      </section>
 
-        <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
-        </header>
+      <section class="results-section">
+        <strong>Form Results:</strong>
+        <div id="results"></div>
+      </section>
+    </main>
 
-        <main>
-            <section>
-                <form id="urlForm">
-                    <input id="name" type="text" name="url" placeholder="Enter URL" required>
-                    <button id="submitButton" type="submit">Submit</button>
-                </form>
-                
-            </section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
-            </section>
-        </main>
-
-        <footer>
-            <p>This is a footer</p>
-        </footer>
-
-    </body>
+    <footer>
+      <p>&copy; 2024 NLP Analyzer. All rights reserved.</p>
+    </footer>
+  </body>
 </html>

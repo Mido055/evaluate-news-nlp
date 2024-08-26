@@ -1,9 +1,4 @@
-// js files
-import { handleSubmit } from './js/formHandler'
+import { handleSubmit } from "./js/formHandler";
+import "./styles/main.scss";
 
-
-
-// alert("I EXIST")
-// console.log("CHANGE!!");
-
-// sass files
+document.getElementById("urlForm").addEventListener("submit", handleSubmit);

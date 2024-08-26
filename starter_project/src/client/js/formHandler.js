@@ -1,30 +1,42 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+async function handleSubmit(event) {
+  event.preventDefault();
+  const formUrl = document.getElementById("name").value;
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
-
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
-    event.preventDefault();
-
-    // Get the URL from the input field
-    const formText = document.getElementById('name').value;
-
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
-    
-    // Check if the URL is valid
- 
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+  try {
+    const response = await fetch("/api/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: formUrl }),
+    });
+    const data = await response.json();
+    console.log("API Response:", data);
+    updateUI(data);
+  } catch (error) {
+    console.error("Error fetching analysis:", error);
+    document.getElementById("results").innerText =
+      "Failed to fetch analysis: " + error.message;
+  }
 }
 
-// Function to send data to the server
+function updateUI(apiData) {
+  const resultsElement = document.getElementById("results");
 
-// Export the handleSubmit function
+  if (apiData && apiData.status && apiData.status.code === "0") {
+    const sentenceList = apiData.sentence_list || [];
+    const firstSentence = sentenceList[0] || {};
+
+    resultsElement.innerHTML = `
+            <p>Polarity: ${apiData.score_tag || "N/A"}</p>
+            <p>Subjectivity: ${apiData.subjectivity || "N/A"}</p>
+            <p>Text: ${firstSentence.text || "No text available"}</p>
+        `;
+  } else {
+    resultsElement.innerHTML = `<p>Error: ${
+      apiData.status.msg || "Unknown error"
+    }</p>`;
+  }
+}
+
 export { handleSubmit };
-
