@@ -29,6 +29,10 @@ The project follows the architecture laid out in the course, with all necessary 
 
 ## Running the Application
 
+## Deploy 
+https://main--friendly-palmier-f49b89.netlify.app/
+
 ### Installation:
 ```bash
 npm install
+
