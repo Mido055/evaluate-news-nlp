@@ -27,11 +27,11 @@ The project follows the architecture laid out in the course, with all necessary 
 - Workbox (for service workers)
 - Jest (for testing)
 
-## Running the Application
 
 ## Deploy 
 https://main--friendly-palmier-f49b89.netlify.app/
 
+## Running the Application
 ### Installation:
 ```bash
 npm install
