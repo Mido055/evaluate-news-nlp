@@ -13,7 +13,19 @@ app.use(bodyParser.json());
 
 console.log(__dirname);
 
+app.use(express.static('dist'));
+
+app.get('/', function (req, res) {
+  res.sendFile(path.resolve('dist/index.html'));
+});
+
 // Variables for url and api key
+const aylien = require("aylien_textapi");
+
+const textapi = new aylien({
+  application_id: process.env.API_ID,
+  application_key: process.env.API_KEY,
+});
 
 
 app.get('/', function (req, res) {
