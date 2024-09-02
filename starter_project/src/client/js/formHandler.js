@@ -1,16 +1,9 @@
-import { checkForName } from './nameChecker';
+import { nameChecker } from './nameChecker';
 
-// Define the server URL
-const serverURL = 'https://localhost:8000/api';
+const serverURL = 'http://localhost:8000/api';
 
-// Wait until the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-    // Now, safely access the DOM elements
-    const form = document.getElementById('urlForm');
-    if (form) {
-        form.addEventListener('submit', handleSubmit);
-    }
-});
+const form = document.getElementById('urlForm');
+form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
     event.preventDefault();
@@ -18,12 +11,36 @@ function handleSubmit(event) {
     // Get the URL from the input field
     const formText = document.getElementById('name').value;
 
-    // Example code that checks the submitted name
-    checkForName(formText);
-
-    // Check if the URL is valid and send it to the server using the serverURL constant
-    // Add your logic here
+    // Validate the URL
+    if (nameChecker(formText)) {
+        // If the URL is valid, proceed with sending data to the server
+        console.log("Sending data to the server...");
+        
+        // Add your logic here to send the URL to the server using the serverURL constant
+        fetch(serverURL, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: formText }),
+        })
+        .then(res => res.json())
+        .then(function(res) {
+            // Handle the response from the server
+            document.getElementById('results').innerHTML = `
+                <p><strong>Polarity:</strong> ${res.polarity}</p>
+                <p><strong>Subjectivity:</strong> ${res.subjectivity}</p>
+                <p><strong>Text:</strong> ${res.text}</p>
+            `;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while processing your request.");
+        });
+    } else {
+        console.log("URL validation failed. Request not sent.");
+    }
 }
 
-// Export the handleSubmit function
 export { handleSubmit };
