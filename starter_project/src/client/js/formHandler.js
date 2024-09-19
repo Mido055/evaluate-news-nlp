@@ -1,9 +1,6 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
+import { nameChecker } from './nameChecker';
 
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
-const serverURL = 'https://localhost:8000/api'
+const serverURL = 'http://localhost:8000/api';
 
 const form = document.getElementById('urlForm');
 form.addEventListener('submit', handleSubmit);
@@ -14,17 +11,36 @@ function handleSubmit(event) {
     // Get the URL from the input field
     const formText = document.getElementById('name').value;
 
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
-    
-    // Check if the URL is valid
- 
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+    // Validate the URL
+    if (nameChecker(formText)) {
+        // If the URL is valid, proceed with sending data to the server
+        console.log("Sending data to the server...");
+        
+        // Add your logic here to send the URL to the server using the serverURL constant
+        fetch(serverURL, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url: formText }),
+        })
+        .then(res => res.json())
+        .then(function(res) {
+            // Handle the response from the server
+            document.getElementById('results').innerHTML = `
+                <p><strong>Polarity:</strong> ${res.polarity}</p>
+                <p><strong>Subjectivity:</strong> ${res.subjectivity}</p>
+                <p><strong>Text:</strong> ${res.text}</p>
+            `;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while processing your request.");
+        });
+    } else {
+        console.log("URL validation failed. Request not sent.");
+    }
 }
 
-// Function to send data to the server
-
-// Export the handleSubmit function
 export { handleSubmit };
-
